@@ -3,7 +3,15 @@ import Product from "../models/productModel.js"
 class ProductService {
   // Get all products
   static async getAll() {
-    return await Product.find();
+    let products = await Product.find();
+
+    let retObject = {"sections":[{
+      "type": "products",
+      "title": "Featured Products"
+    }]};
+
+    retObject.sections[0].items = products;
+    return retObject;
   }
 
   static async create(productData) {
